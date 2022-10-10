@@ -1,0 +1,12 @@
+overwrite: true
+schema: 'http://${REACT_APP_GRAPHQL_ENDPOINT}'
+documents: 'src/graphql/**/*.(graphql|gql)'
+generates:
+    src/generated/graphql.tsx:
+        plugins:
+            - 'typescript'
+            - 'typescript-operations'
+            - 'typescript-react-apollo'
+    ./graphql.schema.json:
+        plugins:
+            - 'introspection'
