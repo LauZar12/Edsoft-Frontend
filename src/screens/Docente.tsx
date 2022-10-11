@@ -32,6 +32,7 @@ function Docentes() {
       name: teachers?.name ?? "",
       lastName: teachers?.lastName ?? "",
       degree: teachers?.degree ?? "",
+      borrar: "",
     }));
   }, [data]);
   const windowSize = useWindowSize();
@@ -76,7 +77,7 @@ function Docentes() {
             {error && <div>¡Ocurrio un error!</div>}
             {data?.teachers && !loading && (
               <div
-                className="d-flex w-full    rounded border border-0 border-white py-4 rounded-5"
+                className="d-flex w-ful border-white py-4"
                 style={{ height: "32rem" }}
               >
                 <DynamicTable columns={columns} data={processedTeachers} />
