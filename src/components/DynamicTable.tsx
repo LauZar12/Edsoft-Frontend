@@ -29,11 +29,15 @@ function DynamicTable({ columns, data }: DynamicTableProps) {
       <Table {...getTableProps()}>
         <TableHead>
           {headerGroups.map((headerGroup) => (
-            <TableRow {...headerGroup.getHeaderGroupProps()}>
+            <TableRow {...headerGroup.getHeaderGroupProps()} >
               {headerGroup.headers.map((column) => (
-                <TableCell>
+                <TableCell
+                  className={`bg-white border-white fs-6 text-primary text-opacity-75 opacity${
+                    active ? "active" : ""
+                  } transitionUp ${active ? "active" : ""}`}
+                >
                   <strong>
-                    <big>{column.render("Header")}</big>
+                  <u><big className="ms-5">{column.render("Header")}</big></u>  
                   </strong>
                 </TableCell>
               ))}
@@ -53,11 +57,11 @@ function DynamicTable({ columns, data }: DynamicTableProps) {
                 {row.cells.map((cell) => (
                   <TableCell
                     {...cell.getCellProps()}
-                    className={`bg-gray2 border-3 border-gray2 rounded-4`}
+                    className={`bg-gray1 border-4 border-white rounded-4`}
                   >
                     <strong>
                       <a
-                        className="text-black"
+                        className="text-black fs-7 ms-5"
                         style={{ textDecoration: "none" }}
                         href="/login"
                       >
