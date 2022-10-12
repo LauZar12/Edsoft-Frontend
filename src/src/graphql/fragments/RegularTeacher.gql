@@ -1,0 +1,5 @@
+fragment RegularTeacher on TeacherType{
+    name
+    lastName
+    degree
+}
