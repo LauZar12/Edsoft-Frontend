@@ -2,18 +2,17 @@ import DynamicTable from "../components/DynamicTable";
 import Nav from "../components/Nav";
 import useWindowSize from "../hooks/useWindowSize";
 import { useMemo } from "react";
-import { useHref } from "react-router-dom";
 import { useGetInstitutionsQuery } from "../generated/graphql";
 import { idText } from "typescript";
 import { useEffect, useState } from "react";
-
+import lupa from "../assets/1lupa.png";
 const columns = [
   {
-    Header: "NOMBRE",
+    Header: "Nombre",
     accessor: "name",
   },
   {
-    Header: "DIRECCIÓN",
+    Header: "Dirección",
     accessor: "address",
   },
 ];
@@ -42,7 +41,7 @@ function Instituciones() {
           (windowSize.width ?? 0) >= 1200 ? "mt-16" : ""
         }`}
       >
-        <div className="col-lg-11 col-md-10 mx-auto bg-white rounded border border-2 border-gray4 rounded-5">
+        <div className="col-lg-11 col-md-10 mx-auto bg-white rounded border border-2 shadow rounded-5">
           <div className="d-flex ms-5 mt-4 fw-bold">
             <h4>
               <strong>Lista de instituciones Educativas</strong>
@@ -55,30 +54,31 @@ function Instituciones() {
               } transitionRight ${active ? "active" : ""}`}
             >
               <input
-                className="col-12 bg-gray2 rounded-5 border-0 p-3 ps-3 fs-5 my-2 ms-15"
+                className="col-12 bg-gray2 rounded-5 border-0  p-3 ps-3 fs-5 my-2 ms-15"
                 type="search"
-                placeholder="Buscar institución"
+                placeholder="        Buscar institución"
                 aria-label="Search"
               />
+              <img className='h-6 w-7' src={lupa} alt='lupa' /> 
             </h5>
             <select
-              className={`bg-gray2 text-gray3 rounded-5 border-0 p-2 fs-5 my-2 me-15 opacity${
+              className={`col-1 bg-gray2 text-gray3 rounded-5 border-0 p-2 fs-5 my-2 me-15 opacity${
                 active ? "active" : ""
               } transitionDown ${active ? "active" : ""}`}
             >
-              <option>Filtrar por</option>
+              <option> Filtrar por </option>
               <option>Nombre</option>
               <option>Dirección</option>
             </select>
           </form>
           {error && <div>¡Ocurrio un error!</div>}
           {data?.institutions && !loading && (
-            <div
-              className="d-flex w-full  rounded border border-0 border-white py-4 rounded-5"
-              style={{ height: "32rem" }}
+            <a href="/login" style={{ textDecoration: "none" }}><div
+              className="d-flex w-full rounded border border-0 border-white py-4 rounded-5"
+              style={{ height: "32rem" }} 
             >
-              <DynamicTable columns={columns} data={processedInstitutions} />
-            </div>
+             <DynamicTable columns={columns} data={processedInstitutions} /> 
+            </div></a>
           )}
         </div>
       </div>

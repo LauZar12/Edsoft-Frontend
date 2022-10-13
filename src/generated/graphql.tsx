@@ -1670,13 +1670,12 @@ export type RegularLogoFragment = { __typename?: 'InstitutionType', logo?: strin
 export type RegularTeacherFragment = { __typename?: 'TeacherType', name: string, lastName: string, degree: string };
 
 export type LoginMutationVariables = Exact<{
-  username: Scalars['String'];
-  email: Scalars['String'];
   password: Scalars['String'];
+  username: Scalars['String'];
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', tokenAuth?: { __typename?: 'ObtainJSONWebToken', token?: string | null, user?: { __typename?: 'UserNode', id: string, email: string } | null } | null };
+export type LoginMutation = { __typename?: 'Mutation', tokenAuth?: { __typename?: 'ObtainJSONWebToken', token?: string | null, errors?: any | null } | null };
 
 export type GetInstitutionsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1714,13 +1713,10 @@ export const RegularTeacherFragmentDoc = gql`
 }
     `;
 export const LoginDocument = gql`
-    mutation Login($username: String!, $email: String!, $password: String!) {
-  tokenAuth(username: $username, email: $email, password: $password) {
+    mutation Login($password: String!, $username: String!) {
+  tokenAuth(password: $password, username: $username) {
     token
-    user {
-      id
-      email
-    }
+    errors
   }
 }
     `;
@@ -1739,9 +1735,8 @@ export type LoginMutationFn = Apollo.MutationFunction<LoginMutation, LoginMutati
  * @example
  * const [loginMutation, { data, loading, error }] = useLoginMutation({
  *   variables: {
- *      username: // value for 'username'
- *      email: // value for 'email'
  *      password: // value for 'password'
+ *      username: // value for 'username'
  *   },
  * });
  */

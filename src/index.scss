@@ -12,6 +12,7 @@ $custom-colors: (
 	'dark': rgba(34, 33, 40, 1),
   'gray5': #BDBDBD,
   'gray4': #8D8D8D,
+  'gray6': #8a8a8ab6,
   'blue2': #5472D3,
   'blue3': #0055A6,
   'blue4':#25429E,
@@ -171,4 +172,25 @@ $selector-value: (
   width: 100px;
   height: 100px;
 }
+.btr {
+  border-top-right-radius: 40px;
+  border: solid 1px #EFEFEF;
+  width: 100px;
+  height: 100px;
+}
+.btn-primary-outline {
+  background-color: transparent;
+  border-color: #ccc;
+}
 
+.subrayado {
+  text-decoration: none;
+}
+
+.subrayado:hover{
+  border-bottom: 1px solid;
+}
+
+.subrayado:focus{
+  border-bottom: 1px solid;
+}

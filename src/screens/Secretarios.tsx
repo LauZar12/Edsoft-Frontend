@@ -14,6 +14,10 @@ const columns = [
     Header: "NombreSecre",
     accessor: "address",
   },
+  {
+    Header: "Id",
+    accessor: "id",
+  },
 ];
 
 function Secretarios() {
@@ -40,12 +44,18 @@ function Secretarios() {
             (windowSize.width ?? 0) >= 1200 ? "mt-16" : ""
           }`}
         >
-          <div className="d-flex ms-20 mb-5 fw-bold">
-            <h4>
-              <strong>Lista de Secretarios</strong> 
-            </h4>
+          <div className="d-flex col-11 ms-15 fw-bold">
+            <strong className="fs-4 ms-10 me-81 pe-20">Lista de Secretarios</strong>
+            <button
+              type="button"
+              className="btn bg-blue3 btn-primary ms-81 w-64 mb-0 pb-0 h-10 btl btr "
+            >
+              <a>
+                <h4 className="text-white fs-5">+ Nuevo Secretario</h4>
+              </a>
+            </button>
           </div>
-          <div className="col-lg-11 col-md-10 mx-auto bg-white rounded border border-2 border-gray4 rounded-5">
+          <div className="col-lg-11 col-md-10 mx-auto bg-white rounded border border-2 shadow rounded-5">
             <form className="d-flex justify-content-between my-4" role="search">
               <h5
                 className={`col-6 opacity${

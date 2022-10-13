@@ -113,8 +113,6 @@ const SideBarWithText: FC<SideBarWithTextProps> = ({ children }) => {
 
                   {openProgAcademico&&(<>
                     <DropdownItem text = {'Calificación'} href = {'/docentes'}/>
-                    <DropdownItem text = {'Cursos Especiales'} href = {'/docentes'}/>
-                    <DropdownItem text = {'Gest. Estudiantes'} href = {'/docentes'}/>
                   </>)}
 
                 </p>
@@ -156,7 +154,7 @@ function DropdownItem(props: { href: string | undefined; text: React.ReactNode; 
 
   return(
     <div className={`ms-9 ps-8 opacity${active ? "active" : ""} transitionDown ${active ? "active" : ""}`}>
-      <a className='stretched-link mb-4 text-white rounded-start mt-8' href={props.href}>
+      <a className='stretched-link mb-4 text-white rounded-start mt-8 subrayado' href={props.href}>
         {props.text}
       </a>
     </div>

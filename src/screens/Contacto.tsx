@@ -39,7 +39,7 @@ function Contacto() {
         <h3 className="col-6 mt-0 pt-10">
           <Ellipse width={2700} height={50} />
         </h3>
-        <div className="col-lg-8 col-md-12 mx-auto bg-gray1 h-30 p-3 ">
+        <div className="col-lg-8 col-md-12 mx-auto bg-gray1 h-30 p-3 mt-5">
           <div className="col-12 ps-20">
             <div className="d-flex text-left fw-bold">
               <h4
@@ -75,17 +75,6 @@ function Contacto() {
                     <br />
                     Barranquilla - Atlántico <br /> Movil: 3013975504
                   </h4>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-6 pt-12 mt-30 ms-30 ps-30">
-          <div className="ms-30 ps-30">
-            <div className="ms-30 ps-30">
-              <div className="ms-30 ps-30">
-                <div className="ms-20 ps-30">
-                  <img src={Contimage} />
                 </div>
               </div>
             </div>

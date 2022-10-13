@@ -6,9 +6,9 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-type SimpleObject = { [key: string]: string | number | JSX.Element | null };
+type SimpleObject = { [key: string]: string | number | React.ReactNode | null };
 
 interface DynamicTableProps {
   columns: Column<SimpleObject>[];
@@ -25,9 +25,9 @@ function DynamicTable({ columns, data }: DynamicTableProps) {
   }, []);
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} className="shadow-none " >
       <Table {...getTableProps()}>
-        <TableHead>
+        <TableHead className="shadow-sm ">
           {headerGroups.map((headerGroup) => (
             <TableRow {...headerGroup.getHeaderGroupProps()} >
               {headerGroup.headers.map((column) => (
@@ -37,7 +37,7 @@ function DynamicTable({ columns, data }: DynamicTableProps) {
                   } transitionUp ${active ? "active" : ""}`}
                 >
                   <strong>
-                  <u><big className="ms-5">{column.render("Header")}</big></u>  
+                  <u><big className="ms-5 ">{column.render("Header")}</big></u>  
                   </strong>
                 </TableCell>
               ))}
@@ -46,7 +46,7 @@ function DynamicTable({ columns, data }: DynamicTableProps) {
         </TableHead>
         <TableBody
           {...getTableBodyProps()}
-          className={`opacity${active ? "active" : ""} transitionLeft ${
+          className={` opacity${active ? "active" : ""} transitionLeft ${
             active ? "active" : ""
           }`}
         >
@@ -61,9 +61,8 @@ function DynamicTable({ columns, data }: DynamicTableProps) {
                   >
                     <strong>
                       <a
-                        className="text-black fs-7 ms-5"
+                        className="text-black fs-7 ms-7"
                         style={{ textDecoration: "none" }}
-                        href="/login"
                       >
                         {" "}
                         {cell.render("Cell")}

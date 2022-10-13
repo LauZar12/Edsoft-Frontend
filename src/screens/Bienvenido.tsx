@@ -72,7 +72,7 @@ function AdminPrincipal() {
           </p>
         </div>
         <h3
-          className={`text-gray3 mt-30 fs-5 me-15 text-center opacity${
+          className={`text-gray3 position-relative mt-30 fs-5 me-15 text-center opacity${
             active ? "active" : ""
           } transitionUp ${active ? "active" : ""}`}
         >

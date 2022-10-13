@@ -4,8 +4,9 @@ import LogoInst from "../assets/institucionLogo@2x.png";
 import BackArrow from "../assets/backArrow.jpg";
 import { useLoginMutation } from "../generated/graphql";
 import { useEffect, useState } from "react";
-import { useGetLogoQuery } from "../generated/graphql";
+import { useNavigate } from "react-router-dom";
 function Login() {
+  const navigate = useNavigate();
   const [LoginMutation, { data, loading, error }] = useLoginMutation();
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
@@ -19,10 +20,11 @@ function Login() {
     const response = await LoginMutation({
       variables: {
         username: user,
-        email: user,
         password,
       },
     });
+    if (response.data?.tokenAuth?.token)
+    {navigate("/bienvenido")}
     console.log(response);
   };
 
@@ -62,7 +64,7 @@ function Login() {
         </p>
 
         <input
-          className="bg-gray2 rounded-4 border-0 pe-20 py-2 ps-6 fs-4 my-0 mb-4 col-lg-9 mx-auto"
+          className="bg-gray2 rounded-4 border-0 py-2 ps-6 fs-4 mb-4 col-lg-9 mx-auto "
           type="text"
           placeholder="Usuario"
           aria-label="User"
@@ -70,7 +72,7 @@ function Login() {
           onChange={(event) => setUser(event.target.value)}
         />
         <input
-          className="bg-gray2 rounded-4 border-0 pe-20 py-2 ps-6 fs-4 my-0 mb-4 col-lg-9 mx-auto ml-5"
+          className="bg-gray2 rounded-4 border-0 pe-20 py-2 ps-6 fs-4  mb-4 col-lg-9 mx-auto"
           type="password"
           placeholder="Contraseña"
           aria-label="Password"
@@ -85,7 +87,7 @@ function Login() {
           className="btn bg-blue2  btn-primary rounded-5 pl-4 ml-4 mx-auto col-lg-9 h-15 mb-5 "
           onClick={onSubmit}
         >
-          <a href="/bienvenido">
+          <a>
             <h4 className="text-white pt-2">Iniciar Sesion</h4>
           </a>
         </button>
