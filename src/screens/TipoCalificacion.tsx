@@ -5,15 +5,14 @@ import { useGetTeachersQuery } from "../generated/graphql";
 import { useEffect, useState } from "react";
 import SideBarWithText from "../components/SideBarWithText";
 import edit from "../assets/01editar.png";
-import delet from "../assets/01eliminar.png";
 
 const columns = [
   {
-    Header: "Apellido" ,
+    Header: "Nombre Calificacion" ,
     accessor: "lastName",
   },
   {
-    Header: "Nombre",
+    Header: "Descripcion",
     accessor: "name",
   },
   {
@@ -21,12 +20,12 @@ const columns = [
     accessor: "editar",
   },
   {
-    Header: "Borrar",
+    Header: "Notas",
     accessor: "borrar",
   },
 ];
 
-function Secretarios() {
+function TipoCalificaion() {
   const [active, setActive] = useState(false);
   const { data, loading, error } = useGetTeachersQuery();
   useEffect(() => {
@@ -37,14 +36,15 @@ function Secretarios() {
     return data.teachers.map((teachers, index) => ({
       name: teachers?.name ?? "",
       lastName: teachers?.lastName ?? "",
+      degree: teachers?.degree ?? "",
       editar: <button className="border-0"><img className={`h-13 w-15`} src={edit}/></button>,
-      borrar: <button className="border-0 " ><img className={`h-8 w-10`} src={delet}/></button>,
+      borrar: <button className="border-0 " >imagen notitas</button>,
     }));
   }, [data]);
   const windowSize = useWindowSize();
 
   return (
-    <SideBarWithText  location = {"Funcionarios"} sublocation = {"Secretarios"}>
+    <SideBarWithText location = {"Progreso Anual"} sublocation = {"Tipo de Calificación"}>
       <div className="w-100 h-100 btl bg-gray1">
         <div
           className={`ps-10 mw-100 h-full row ${
@@ -52,13 +52,13 @@ function Secretarios() {
           }`}
         >
           <div className="d-flex col-11 ms-20 fw-bold">
-            <strong className="fs-4 ms-6 me-81 pe-30">Lista Secretarios</strong>
+            <strong className="fs-4 ms-6 me-81 pe-20">Tipo de Calificación</strong>
             <button
               type="button"
               className="btn bg-blue3 btn-primary ms-81 w-64 mb-0 pb-0 h-10 btl btr "
             >
               <a>
-                <h4 className="text-white fs-5">+ Nuevo Secretario</h4>
+                <h4 className="text-white fs-5">+ Nueva Calificacion</h4>
               </a>
             </button>
           </div>
@@ -72,7 +72,7 @@ function Secretarios() {
                 <input
                   className="col-12 bg-gray2 rounded-5 border-0 p-3 ps-3 fs-5 my-2 ms-15"
                   type="search"
-                  placeholder="Buscar Secretario"
+                  placeholder="Buscar Nota"
                   aria-label="Search"
                 />
               </h5>
@@ -102,4 +102,4 @@ function Secretarios() {
   );
 }
 
-export default Secretarios;
+export default TipoCalificaion;

@@ -1,4 +1,11 @@
-import React, { FC, JSXElementConstructor, ReactElement, ReactFragment, ReactNode, ReactPortal } from "react";
+import React, {
+  FC,
+  JSXElementConstructor,
+  ReactElement,
+  ReactFragment,
+  ReactNode,
+  ReactPortal,
+} from "react";
 import Logo from "../assets/logo@2x.png";
 import { useEffect, useState } from "react";
 import icon1 from "../assets/1icon.jpg";
@@ -8,14 +15,17 @@ import icon4 from "../assets/4icon.jpg";
 import icon5 from "../assets/5icon.jpg";
 
 interface SideBarWithTextProps {
+  location: String;
+  sublocation: String;
   children: ReactNode;
 }
 
-
-const SideBarWithText: FC<SideBarWithTextProps> = ({ children }) => {
-
+const SideBarWithText: FC<SideBarWithTextProps> = ({
+  children,
+  location,
+  sublocation,
+}) => {
   const [openFuncionarios, setOpenFuncionarios] = useState(false);
-
   const [openProgActual, setOpenProgActual] = useState(false);
   const [openProgAcademico, setOpenProgAcademico] = useState(false);
   const [openReportes, setOpenReportes] = useState(false);
@@ -47,92 +57,138 @@ const SideBarWithText: FC<SideBarWithTextProps> = ({ children }) => {
             active ? "active" : ""
           } transitionLeft ${active ? "active" : ""}`}
         >
-          Institución Educativa San Marcos {">"} Configuración
+          <p className="pt-4">
+            Institución Educativa San Marcos &nbsp; {">"} &nbsp; {location}{" "}
+            &nbsp; {">"} &nbsp; {sublocation}
+          </p>
         </div>
       </div>
       <div className="d-flex" style={{ height: "calc(100% - 6rem)" }}>
         <div className={`w-20p bg-blue3`}>
-          <div className={`d-flex align-items-center justify-content-center flex-column opacity${
-            active ? "active" : ""
-          } transitionRight  ${active ? "active" : ""} `}>
+          <div
+            className={`d-flex align-items-center justify-content-center flex-column opacity${
+              active ? "active" : ""
+            } transitionRight  ${active ? "active" : ""} `}
+          >
             <div className="mb-2 me-20 text-white mt-25">
-              <p className="fs-5">
-                <img src={icon1}   className="h-18 w-19" />
+              <a className="fs-5 text-white subrayado" href="/configuracion">
+                <img src={icon1} className="h-18 w-19" />
                 Configuración
-              </p>
+              </a>
             </div>
             <div className="aling-content-right">
-              
-              <div className="mb-4 text-white rounded-start mt-8"  onClick={()=>{setOpenFuncionarios(!openFuncionarios);setOpenProgAcademico(false);setOpenProgActual(false);setOpenReportes(false)}}>
+              <div
+                className="mb-4 text-white rounded-start mt-8"
+                onClick={() => {
+                  setOpenFuncionarios(!openFuncionarios);
+                  setOpenProgAcademico(false);
+                  setOpenProgActual(false);
+                  setOpenReportes(false);
+                }}
+              >
                 <p className="text-white fs-5 rounded-start">
                   <img src={icon2} className="w-15 h-14" />
 
-                  <button className='text-white menu-trigger border-transparent btn-primary-outline'>
+                  <button className="text-white menu-trigger border-transparent btn-primary-outline">
                     Funcionarios
                   </button>
 
-                  {openFuncionarios&&(<>
-                    <DropdownItem text = {'Docentes'} href = {'/docentes'}/>
-                    <DropdownItem text = {'Secretarios'} href = {'/secretarios'}/>
-                  </>)}
-                  
-                 </p>
+                  {openFuncionarios && (
+                    <>
+                      <DropdownItem text={"Docentes"} href={"/docentes"} />
+                      <DropdownItem
+                        text={"Secretarios"}
+                        href={"/secretarios"}
+                      />
+                    </>
+                  )}
+                </p>
               </div>
 
-              <div className="mb-4 text-white rounded-start mt-15" onClick={()=>{setOpenProgActual(!openProgActual);setOpenFuncionarios(false);setOpenProgAcademico(false);setOpenReportes(false)}}>
+              <div
+                className="mb-4 text-white rounded-start mt-15"
+                onClick={() => {
+                  setOpenProgActual(!openProgActual);
+                  setOpenFuncionarios(false);
+                  setOpenProgAcademico(false);
+                  setOpenReportes(false);
+                }}
+              >
                 <p className="text-white rounded-start fs-5">
                   <img src={icon3} className="w-15 h-14" />
 
-                  <button className='text-white menu-trigger border-transparent btn-primary-outline'>
-                    Progreso Actual
+                  <button className="text-white menu-trigger border-transparent btn-primary-outline">
+                    Progreso Anual
                   </button>
-
-                  {openProgActual&&(<>
-                    <DropdownItem text = {'Tipo de Calificación'} href = {'/docentes'}/>
-                    <DropdownItem text = {'Establecer Año'} href = {'/docentes'}/>
-                    <DropdownItem text = {'Copiar Año Anterior'} href = {'/docentes'}/>
-                    <DropdownItem text = {'Crear Cursos'} href = {'/docentes'}/>
-                    <DropdownItem text = {'Area'} href = {'/docentes'}/>
-                    <DropdownItem text = {'Asignatura'} href = {'/docentes'}/>
-                    <DropdownItem text = {'Horario'} href = {'/docentes'}/>
-                    <DropdownItem text = {'Logros'} href = {'/docentes'}/>
-                    <DropdownItem text = {'Matrículas'} href = {'/docentes'}/>
-                    <DropdownItem text = {'Costos'} href = {'/docentes'}/>
-                  </>)}
-
+                  {openProgActual && (
+                    <>
+                      <DropdownItem
+                        text={"Tipo de Calificación"}
+                        href={"/tipocalificacion"}
+                      />
+                      <DropdownItem
+                        text={"Establecer Año"}
+                        href={"/establecerano"}
+                      />
+                      <DropdownItem text={"Cursos"} href={"/cursos"} />
+                      <DropdownItem text={"Areas"} href={"/areas"} />
+                      <DropdownItem
+                        text={"Asignaturas"}
+                        href={"/asignaturas"}
+                      />
+                      <DropdownItem text={"Logros"} href={"/logros"} />
+                    </>
+                  )}
                 </p>
               </div>
-
-              <div className="mb-4 text-white rounded-start mt-15"  onClick={()=>{setOpenProgAcademico(!openProgAcademico);setOpenFuncionarios(false);setOpenProgActual(false);setOpenReportes(false)}}>
+              <div
+                className="mb-4 text-white rounded-start mt-15"
+                onClick={() => {
+                  setOpenProgAcademico(!openProgAcademico);
+                  setOpenFuncionarios(false);
+                  setOpenProgActual(false);
+                  setOpenReportes(false);
+                }}
+              >
                 <p className="text-white rounded-start fs-5">
                   <img src={icon4} className="w-14 h-14 me-1" />
 
-                  <button className='text-white menu-trigger border-transparent btn-primary-outline'>
+                  <button className="text-white menu-trigger border-transparent btn-primary-outline">
                     Progreso Académico
                   </button>
 
-                  {openProgAcademico&&(<>
-                    <DropdownItem text = {'Calificación'} href = {'/docentes'}/>
-                  </>)}
-
+                  {openProgAcademico && (
+                    <>
+                      <DropdownItem text={"Calificación"} href={"/docentes"} />
+                    </>
+                  )}
                 </p>
               </div>
 
-              <div className="mb-4 text-white rounded-start mt-15" onClick={()=>{setOpenReportes(!openReportes);setOpenFuncionarios(false);setOpenProgActual(false);setOpenProgAcademico(false)}}>
+              <div
+                className="mb-4 text-white rounded-start mt-15"
+                onClick={() => {
+                  setOpenReportes(!openReportes);
+                  setOpenFuncionarios(false);
+                  setOpenProgActual(false);
+                  setOpenProgAcademico(false);
+                }}
+              >
                 <p className="fs-5">
                   <img src={icon5} className="w-14 h-14 me-1" />
 
-                  <button className='text-white menu-trigger border-transparent btn-primary-outline'>
+                  <button className="text-white menu-trigger border-transparent btn-primary-outline">
                     Reportes
                   </button>
 
-                  {openReportes&&(<>
-                    <DropdownItem text = {'Indicadores'} href = {'/docentes'}/>
-                    <DropdownItem text = {'Planillas'} href = {'/docentes'}/>
-                    <DropdownItem text = {'Listados'} href = {'/docentes'}/>
-                    <DropdownItem text = {'Entregables'} href = {'/docentes'}/>
-                  </>)}
-
+                  {openReportes && (
+                    <>
+                      <DropdownItem text={"Indicadores"} href={"/docentes"} />
+                      <DropdownItem text={"Planillas"} href={"/docentes"} />
+                      <DropdownItem text={"Listados"} href={"/docentes"} />
+                      <DropdownItem text={"Entregables"} href={"/docentes"} />
+                    </>
+                  )}
                 </p>
               </div>
             </div>
@@ -144,22 +200,30 @@ const SideBarWithText: FC<SideBarWithTextProps> = ({ children }) => {
   );
 };
 
-function DropdownItem(props: { href: string | undefined; text: React.ReactNode; }){
-
+function DropdownItem(props: {
+  href: string | undefined;
+  text: React.ReactNode;
+}) {
   const [active, setActive] = useState(false);
 
   useEffect(() => {
     setActive(true);
   }, []);
 
-  return(
-    <div className={`ms-9 ps-8 opacity${active ? "active" : ""} transitionDown ${active ? "active" : ""}`}>
-      <a className='stretched-link mb-4 text-white rounded-start mt-8 subrayado' href={props.href}>
+  return (
+    <div
+      className={`ms-9 ps-8 opacity${active ? "active" : ""} transitionDown ${
+        active ? "active" : ""
+      }`}
+    >
+      <a
+        className="stretched-link mb-4 text-white rounded-start mt-8 subrayado"
+        href={props.href}
+      >
         {props.text}
       </a>
     </div>
   );
 }
-
 
 export default SideBarWithText;

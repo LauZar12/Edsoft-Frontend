@@ -7,6 +7,12 @@ import Bienvenido from './screens/Bienvenido';
 import AdminPrincipal from './screens/CPassword';
 import Docentes from './screens/Docente';
 import Secretarios from './screens/Secretarios';
+import TipoCalificaion from './screens/TipoCalificacion';
+import EstablecerAño from './screens/EstablecerAño';
+import CrearCursos from './screens/CrearCursos';
+import Areas from './screens/Areas';
+import Asignaturas from './screens/Asignaturas';
+import Logros from './screens/Logros';
 
 function App() {
 	return (
@@ -21,6 +27,12 @@ function App() {
 				<Route path='/configuracion' element={<AdminPrincipal/>} />
 				<Route path='/docentes' element={<Docentes/>} />
 				<Route path='/secretarios' element={<Secretarios/>} />
+				<Route path='/tipocalificacion' element={<TipoCalificaion/>} />
+				<Route path='/establecerano' element={<EstablecerAño/>} />
+				<Route path='/cursos' element={<CrearCursos/>} />
+				<Route path='/areas' element={<Areas/>} />
+				<Route path='/asignaturas' element={<Asignaturas/>} />
+				<Route path='/logros' element={<Logros/>} />
 			</Routes>
 		</BrowserRouter>
 	);

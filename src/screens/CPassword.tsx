@@ -13,7 +13,7 @@ function Instituciones() {
   }, []);
 
   return (
-    <SideBarWithText>
+    <SideBarWithText location = {"Configuracion"} sublocation = {"Cambiar Contraseña"}>
       <div className="btl w-100 h-100 overflow-hidden bg-gray1 pb-4">
       <h1
           className={`text-black fs-2 fw-bold ms-30 mt-10 opacity${

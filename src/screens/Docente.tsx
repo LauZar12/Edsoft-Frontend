@@ -49,7 +49,7 @@ function Docentes() {
   const windowSize = useWindowSize();
 
   return (
-    <SideBarWithText>
+    <SideBarWithText location = {"Funcionarios"} sublocation = {"Docentes"}>
       <div className="w-100 h-100 btl bg-gray1">
         <div
           className={`ps-10 mw-100 h-full row ${
