@@ -1,4 +1,0 @@
-fragment RegularLogo on InstitutionType {
-    logo
-    idInstitution
-}

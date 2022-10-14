@@ -1,5 +1,0 @@
-query GetTeachers {
-  teachers(idInstitution: 1000) {
-    ...RegularTeacher
-  }
-}

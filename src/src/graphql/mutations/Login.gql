@@ -1,6 +1,0 @@
-mutation Login ($password:String!,$username:String!){
-  tokenAuth (password:$password, username:$username){
-    token
-    errors
-  }
-}
