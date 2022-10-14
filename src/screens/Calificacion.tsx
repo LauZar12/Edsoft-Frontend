@@ -49,7 +49,7 @@ function Secretarios() {
   const windowSize = useWindowSize();
 
   return (
-    <SideBarWithText  location = {"Funcionarios"} sublocation = {"Secretarios"}>
+    <SideBarWithText  location = {"Progreso Académico"} sublocation = {"Calificación"}>
       <div className="w-100 h-100 btl bg-gray1">
         <div
           className={`ps-10 mw-100 h-full row ${
