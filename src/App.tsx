@@ -13,6 +13,9 @@ import CrearCursos from './screens/CrearCursos';
 import Areas from './screens/Areas';
 import Asignaturas from './screens/Asignaturas';
 import Logros from './screens/Logros';
+import CopyYear from './screens/CopyYear';
+import CrearDocente from './screens/CrearDocente';
+import CrearSecretario from './screens/CrearSecretario';
 
 function App() {
 	return (
@@ -33,6 +36,9 @@ function App() {
 				<Route path='/areas' element={<Areas/>} />
 				<Route path='/asignaturas' element={<Asignaturas/>} />
 				<Route path='/logros' element={<Logros/>} />
+				<Route path='/copyyear' element={<CopyYear/>} />
+				<Route path='/creardocente' element={<CrearDocente/>} />
+				<Route path='/crearsecre' element={<CrearSecretario/>} />
 			</Routes>
 		</BrowserRouter>
 	);

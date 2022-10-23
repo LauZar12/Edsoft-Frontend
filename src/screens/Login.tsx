@@ -23,8 +23,9 @@ function Login() {
         password,
       },
     });
-    if (response.data?.tokenAuth?.token)
-    {navigate("/bienvenido")}
+    if (response.data?.tokenAuth?.token) {
+      navigate("/bienvenido");
+    }
     console.log(response);
   };
 

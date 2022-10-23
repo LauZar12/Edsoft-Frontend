@@ -1,0 +1,5 @@
+mutation DeleteDocente($idInstitucion: Int!, $idDocente: Int!) {
+  deleteTeacher(idInstitution: $idInstitucion, idTeacher: $idDocente) {
+     __typename
+  }
+}

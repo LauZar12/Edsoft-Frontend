@@ -5,8 +5,10 @@ import SideBar from "../components/SideBar";
 import { useEffect, useState } from "react";
 import Wpp from "../assets/01wpp.png";
 import Msg from "../assets/02msg.png";
+import { useLocation } from "react-router-dom";
 
 function AdminPrincipal() {
+  const location = useLocation();
   const [active, setActive] = useState(false);
   const windowSize = useWindowSize();
   useEffect(() => {

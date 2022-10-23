@@ -1,0 +1,7 @@
+fragment RegularStudent on StudentType{
+    name
+    lastName
+    sex
+    direction
+    birthday
+}

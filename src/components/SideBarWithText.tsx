@@ -13,6 +13,7 @@ import icon2 from "../assets/2icon.jpg";
 import icon3 from "../assets/3icon.jpg";
 import icon4 from "../assets/4icon.jpg";
 import icon5 from "../assets/5icon.jpg";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface SideBarWithTextProps {
   location: String;
@@ -20,15 +21,15 @@ interface SideBarWithTextProps {
   children: ReactNode;
 }
 
+type DropdownsTipos = "Funcionario" | "ProgAcademico" | "ProgAnual" |"Reportes";
+
 const SideBarWithText: FC<SideBarWithTextProps> = ({
   children,
   location,
   sublocation,
 }) => {
-  const [openFuncionarios, setOpenFuncionarios] = useState(false);
-  const [openProgActual, setOpenProgActual] = useState(false);
-  const [openProgAcademico, setOpenProgAcademico] = useState(false);
-  const [openReportes, setOpenReportes] = useState(false);
+  const navigationLocation = useLocation();
+  const [dropdownAbierto, setDropdownAbierto] = useState<DropdownsTipos | null>(navigationLocation.state?.fromDropdown ?? null);
 
   const [active, setActive] = useState(false);
 
@@ -63,134 +64,130 @@ const SideBarWithText: FC<SideBarWithTextProps> = ({
           </p>
         </div>
       </div>
-      <div className="d-flex" style={{ height: "calc(100% - 6rem)" }}>
+      <div
+        className="d-flex"
+        style={{
+          height: "calc(100% - 6rem)",
+        }}
+      >
         <div className={`w-20p bg-blue3`}>
           <div
             className={`d-flex align-items-center justify-content-center flex-column opacity${
-              active ? "active" : ""
+              (active && !navigationLocation.state?.noreset) ? "active" : ""
             } transitionRight  ${active ? "active" : ""} `}
           >
-            <div className="mb-2 me-20 text-white mt-25">
-              <a className="fs-5 text-white subrayado" href="/configuracion">
-                <img src={icon1} className="h-18 w-19" />
+            <div className="mb-2 ms-2 me-20 text-white mt-25">
+              <a className="fs-5 p-0 m-0 text-white text-decoration-none" href="/configuracion">
+                <img src={icon1} className="h-18 w-13 m-0 p-0" />
                 Configuración
               </a>
             </div>
-            <div className="aling-content-right">
+            <div >
               <div
-                className="mb-4 text-white rounded-start mt-8"
+                className="text-white rounded-start mt-8"
                 onClick={() => {
-                  setOpenFuncionarios(!openFuncionarios);
-                  setOpenProgAcademico(false);
-                  setOpenProgActual(false);
-                  setOpenReportes(false);
+                  setDropdownAbierto("Funcionario");
                 }}
               >
-                <p className="text-white fs-5 rounded-start">
+                <div className="text-white fs-5 rounded-start">
                   <img src={icon2} className="w-15 h-14" />
 
-                  <button className="text-white menu-trigger border-transparent btn-primary-outline">
+                  <button className="text-white menu-trigger border-transparent btn-primary-outline" >
                     Funcionarios
                   </button>
 
-                  {openFuncionarios && (
+                  {dropdownAbierto == "Funcionario" && (
                     <>
-                      <DropdownItem text={"Docentes"} href={"/docentes"} />
+                      <DropdownItem text={"Docentes"} href={"/docentes"} dropdownAbierto={dropdownAbierto}/>
                       <DropdownItem
                         text={"Secretarios"}
                         href={"/secretarios"}
-                      />
+                        dropdownAbierto={dropdownAbierto}/>
                     </>
                   )}
-                </p>
+                </div>
               </div>
 
               <div
-                className="mb-4 text-white rounded-start mt-15"
+                className="text-white rounded-start mt-12"
                 onClick={() => {
-                  setOpenProgActual(!openProgActual);
-                  setOpenFuncionarios(false);
-                  setOpenProgAcademico(false);
-                  setOpenReportes(false);
+                  setDropdownAbierto("ProgAnual");
                 }}
               >
-                <p className="text-white rounded-start fs-5">
+                <div className="text-white rounded-start fs-5">
                   <img src={icon3} className="w-15 h-14" />
 
-                  <button className="text-white menu-trigger border-transparent btn-primary-outline">
+                  <button className="text-white menu-trigger border-transparent btn-primary-outline pb-0">
                     Progreso Anual
                   </button>
-                  {openProgActual && (
+                  {dropdownAbierto == "ProgAnual" && (
                     <>
                       <DropdownItem
                         text={"Tipo de Calificación"}
                         href={"/tipocalificacion"}
-                      />
+                        dropdownAbierto={dropdownAbierto}/>
                       <DropdownItem
                         text={"Establecer Año"}
                         href={"/establecerano"}
-                      />
-                      <DropdownItem text={"Cursos"} href={"/cursos"} />
-                      <DropdownItem text={"Areas"} href={"/areas"} />
+                        dropdownAbierto={dropdownAbierto}/>
+                      <DropdownItem
+                        text={"Copiar Año Anterior"}
+                        href={"/copyyear"}
+                        dropdownAbierto={dropdownAbierto}/>
+                      <DropdownItem text={"Cursos"} href={"/cursos"} dropdownAbierto={dropdownAbierto}/>
+                      <DropdownItem text={"Areas"} href={"/areas"} dropdownAbierto={dropdownAbierto}/>
                       <DropdownItem
                         text={"Asignaturas"}
                         href={"/asignaturas"}
-                      />
-                      <DropdownItem text={"Logros"} href={"/logros"} />
+                        dropdownAbierto={dropdownAbierto}/>
+                      <DropdownItem text={"Logros"} href={"/logros"} dropdownAbierto={dropdownAbierto}/>
                     </>
                   )}
-                </p>
+                </div>
               </div>
+
               <div
-                className="mb-4 text-white rounded-start mt-15"
+                className="text-white rounded-start mt-12"
                 onClick={() => {
-                  setOpenProgAcademico(!openProgAcademico);
-                  setOpenFuncionarios(false);
-                  setOpenProgActual(false);
-                  setOpenReportes(false);
+                  setDropdownAbierto("ProgAcademico");
                 }}
               >
-                <p className="text-white rounded-start fs-5">
+                <div className="text-white rounded-start fs-5">
                   <img src={icon4} className="w-14 h-14 me-1" />
 
                   <button className="text-white menu-trigger border-transparent btn-primary-outline">
                     Progreso Académico
                   </button>
 
-                  {openProgAcademico && (
+                  {dropdownAbierto == "ProgAcademico" && (
                     <>
-                      <DropdownItem text={"Calificación"} href={"/docentes"} />
+                      <DropdownItem text={"Calificación"} href={"/docentes"} dropdownAbierto={dropdownAbierto}/>
                     </>
                   )}
-                </p>
+                </div>
               </div>
 
               <div
-                className="mb-4 text-white rounded-start mt-15"
+                className="text-white rounded-start mt-12 fs-5"
                 onClick={() => {
-                  setOpenReportes(!openReportes);
-                  setOpenFuncionarios(false);
-                  setOpenProgActual(false);
-                  setOpenProgAcademico(false);
-                }}
-              >
-                <p className="fs-5">
+                  setDropdownAbierto("Reportes");
+                }}>
                   <img src={icon5} className="w-14 h-14 me-1" />
 
                   <button className="text-white menu-trigger border-transparent btn-primary-outline">
                     Reportes
                   </button>
 
-                  {openReportes && (
+                  {dropdownAbierto == "Reportes" && (
                     <>
-                      <DropdownItem text={"Indicadores"} href={"/docentes"} />
-                      <DropdownItem text={"Planillas"} href={"/docentes"} />
-                      <DropdownItem text={"Listados"} href={"/docentes"} />
-                      <DropdownItem text={"Entregables"} href={"/docentes"} />
+                      <DropdownItem text={"Indicadores"} href={"/docentes"} dropdownAbierto={dropdownAbierto}/>
+                      <DropdownItem text={"Planillas"} href={"/docentes"} dropdownAbierto={dropdownAbierto}/>
+                      <DropdownItem text={"Listados"} href={"/docentes"} dropdownAbierto={dropdownAbierto}/>
+                      <DropdownItem text={"Entregables"} href={"/docentes"} dropdownAbierto={dropdownAbierto}/>
                     </>
                   )}
-                </p>
               </div>
+
             </div>
           </div>
         </div>
@@ -203,7 +200,10 @@ const SideBarWithText: FC<SideBarWithTextProps> = ({
 function DropdownItem(props: {
   href: string | undefined;
   text: React.ReactNode;
+  dropdownAbierto: DropdownsTipos;
+  // fromDropdown: string | null
 }) {
+  const navigate = useNavigate();
   const [active, setActive] = useState(false);
 
   useEffect(() => {
@@ -212,16 +212,18 @@ function DropdownItem(props: {
 
   return (
     <div
-      className={`ms-9 ps-8 opacity${active ? "active" : ""} transitionDown ${
+      className={`ms-5 ps-8 opacity${active ? "active" : ""} transitionDown ${
         active ? "active" : ""
       }`}
     >
-      <a
-        className="stretched-link mb-4 text-white rounded-start mt-8 subrayado"
-        href={props.href}
+      <button
+        className="btn bg-transparent text-white rounded-3 fs-5 pt-0 pb-0 mt-1 mb-1 aclarado"
+        onClick={() => {
+          if (props.href) navigate(props.href, { state: { noreset: true, fromDropdown: props.dropdownAbierto/*props.fromDropdown*/ } });
+        }}
       >
         {props.text}
-      </a>
+      </button>
     </div>
   );
 }

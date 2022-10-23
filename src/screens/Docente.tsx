@@ -1,7 +1,10 @@
 import DynamicTable from "../components/DynamicTable";
 import useWindowSize from "../hooks/useWindowSize";
 import { useMemo } from "react";
-import { useGetTeachersQuery } from "../generated/graphql";
+import {
+  useDeleteDocenteMutation,
+  useGetTeachersQuery,
+} from "../generated/graphql";
 import { useEffect, useState } from "react";
 import SideBarWithText from "../components/SideBarWithText";
 import edit from "../assets/01editar.png";
@@ -9,7 +12,7 @@ import delet from "../assets/01eliminar.png";
 
 const columns = [
   {
-    Header: "Apellido" ,
+    Header: "Apellido",
     accessor: "lastName",
   },
   {
@@ -31,25 +34,50 @@ const columns = [
 ];
 
 function Docentes() {
+  const [DeleteDocente] = useDeleteDocenteMutation();
   const [active, setActive] = useState(false);
-  const { data, loading, error } = useGetTeachersQuery();
+  const { data, loading, error, refetch,  } = useGetTeachersQuery({fetchPolicy: "network-only"});
   useEffect(() => {
     setActive(true);
   }, []);
   const processedTeachers = useMemo(() => {
     if (!data?.teachers) return [];
-    return data.teachers.map((teachers, index) => ({
-      name: teachers?.name ?? "",
-      lastName: teachers?.lastName ?? "",
-      degree: teachers?.degree ?? "",
-      editar: <button className="border-0"><img className={`h-13 w-15`} src={edit}/></button>,
-      borrar: <button className="border-0 " ><img className={`h-8 w-10`} src={delet}/></button>,
+    return data.teachers.map((teacher, index) => ({
+      name: teacher?.name ?? "",
+      lastName: teacher?.lastName ?? "",
+      degree: teacher?.degree ?? "",
+      editar: (
+        <button
+          className="border-0"
+        >
+          <img className={`h-13 w-15`} src={edit} />
+        </button>
+      ),
+      borrar: (
+        <button
+          className="border-0"
+          onClick={async () => {
+            /*eslint-disable*/
+            if (teacher && confirm("Estas seguro de lo que estas haciedo manito?")) {
+              await DeleteDocente({
+                variables: {
+                  idDocente: parseInt(teacher.idTeacher, 10),
+                  idInstitucion: 1000 /**CAMBIAR ESTO */,
+                },
+              });
+              await refetch();
+            }
+          }}
+        >
+          <img className={`h-8 w-10`} src={delet} />
+        </button>
+      ),
     }));
   }, [data]);
   const windowSize = useWindowSize();
 
   return (
-    <SideBarWithText location = {"Funcionarios"} sublocation = {"Docentes"}>
+    <SideBarWithText location={"Funcionarios"} sublocation={"Docentes"}>
       <div className="w-100 h-100 btl bg-gray1">
         <div
           className={`ps-10 mw-100 h-full row ${
@@ -57,12 +85,14 @@ function Docentes() {
           }`}
         >
           <div className="d-flex col-11 ms-20 fw-bold">
-            <strong className="fs-4 ms-10 me-81 pe-20">Lista de Docentes</strong>
+            <strong className="fs-4 ms-10 me-81 pe-20">
+              Lista de Docentes
+            </strong>
             <button
               type="button"
               className="btn bg-blue3 btn-primary ms-81 w-64 mb-0 pb-0 h-10 btl btr "
             >
-              <a>
+              <a href="/creardocente">
                 <h4 className="text-white fs-5">+ Nuevo Docente</h4>
               </a>
             </button>

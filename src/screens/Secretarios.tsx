@@ -57,7 +57,7 @@ function Secretarios() {
               type="button"
               className="btn bg-blue3 btn-primary ms-81 w-64 mb-0 pb-0 h-10 btl btr "
             >
-              <a>
+              <a href="/crearsecre">
                 <h4 className="text-white fs-5">+ Nuevo Secretario</h4>
               </a>
             </button>

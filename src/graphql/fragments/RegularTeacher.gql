@@ -1,4 +1,5 @@
 fragment RegularTeacher on TeacherType{
+  	idTeacher
     name
     lastName
     degree

@@ -1,0 +1,5 @@
+query GetStudents {
+  students (idInstitution:1000){
+    ...RegularStudent
+  }
+}

@@ -154,7 +154,7 @@ $selector-value: (
 }
 .opacity.active {
   opacity: 1;
-  pointer-events:none;
+  // pointer-events:none;
 }
 
 
@@ -193,4 +193,8 @@ $selector-value: (
 
 .subrayado:focus{
   border-bottom: 1px solid;
+}
+
+.z-1024 {
+  z-index: 1024;
 }

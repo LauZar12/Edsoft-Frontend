@@ -1667,7 +1667,17 @@ export type RegularInstitutionFragment = { __typename?: 'InstitutionType', idIns
 
 export type RegularLogoFragment = { __typename?: 'InstitutionType', logo?: string | null, idInstitution: string };
 
-export type RegularTeacherFragment = { __typename?: 'TeacherType', name: string, lastName: string, degree: string };
+export type RegularStudentFragment = { __typename?: 'StudentType', name: string, lastName: string, sex: string, direction: string, birthday: any };
+
+export type RegularTeacherFragment = { __typename?: 'TeacherType', idTeacher: string, name: string, lastName: string, degree: string };
+
+export type DeleteDocenteMutationVariables = Exact<{
+  idInstitucion: Scalars['Int'];
+  idDocente: Scalars['Int'];
+}>;
+
+
+export type DeleteDocenteMutation = { __typename?: 'Mutation', deleteTeacher?: { __typename: 'DeleteTeacher' } | null };
 
 export type LoginMutationVariables = Exact<{
   password: Scalars['String'];
@@ -1687,10 +1697,15 @@ export type GetLogoQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetLogoQuery = { __typename?: 'Query', institutions?: Array<{ __typename?: 'InstitutionType', logo?: string | null, idInstitution: string } | null> | null };
 
+export type GetStudentsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetStudentsQuery = { __typename?: 'Query', students?: Array<{ __typename?: 'StudentType', name: string, lastName: string, sex: string, direction: string, birthday: any } | null> | null };
+
 export type GetTeachersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetTeachersQuery = { __typename?: 'Query', teachers?: Array<{ __typename?: 'TeacherType', name: string, lastName: string, degree: string } | null> | null };
+export type GetTeachersQuery = { __typename?: 'Query', teachers?: Array<{ __typename?: 'TeacherType', idTeacher: string, name: string, lastName: string, degree: string } | null> | null };
 
 export const RegularInstitutionFragmentDoc = gql`
     fragment RegularInstitution on InstitutionType {
@@ -1705,13 +1720,57 @@ export const RegularLogoFragmentDoc = gql`
   idInstitution
 }
     `;
+export const RegularStudentFragmentDoc = gql`
+    fragment RegularStudent on StudentType {
+  name
+  lastName
+  sex
+  direction
+  birthday
+}
+    `;
 export const RegularTeacherFragmentDoc = gql`
     fragment RegularTeacher on TeacherType {
+  idTeacher
   name
   lastName
   degree
 }
     `;
+export const DeleteDocenteDocument = gql`
+    mutation DeleteDocente($idInstitucion: Int!, $idDocente: Int!) {
+  deleteTeacher(idInstitution: $idInstitucion, idTeacher: $idDocente) {
+    __typename
+  }
+}
+    `;
+export type DeleteDocenteMutationFn = Apollo.MutationFunction<DeleteDocenteMutation, DeleteDocenteMutationVariables>;
+
+/**
+ * __useDeleteDocenteMutation__
+ *
+ * To run a mutation, you first call `useDeleteDocenteMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteDocenteMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteDocenteMutation, { data, loading, error }] = useDeleteDocenteMutation({
+ *   variables: {
+ *      idInstitucion: // value for 'idInstitucion'
+ *      idDocente: // value for 'idDocente'
+ *   },
+ * });
+ */
+export function useDeleteDocenteMutation(baseOptions?: Apollo.MutationHookOptions<DeleteDocenteMutation, DeleteDocenteMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteDocenteMutation, DeleteDocenteMutationVariables>(DeleteDocenteDocument, options);
+      }
+export type DeleteDocenteMutationHookResult = ReturnType<typeof useDeleteDocenteMutation>;
+export type DeleteDocenteMutationResult = Apollo.MutationResult<DeleteDocenteMutation>;
+export type DeleteDocenteMutationOptions = Apollo.BaseMutationOptions<DeleteDocenteMutation, DeleteDocenteMutationVariables>;
 export const LoginDocument = gql`
     mutation Login($password: String!, $username: String!) {
   tokenAuth(password: $password, username: $username) {
@@ -1815,6 +1874,40 @@ export function useGetLogoLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Ge
 export type GetLogoQueryHookResult = ReturnType<typeof useGetLogoQuery>;
 export type GetLogoLazyQueryHookResult = ReturnType<typeof useGetLogoLazyQuery>;
 export type GetLogoQueryResult = Apollo.QueryResult<GetLogoQuery, GetLogoQueryVariables>;
+export const GetStudentsDocument = gql`
+    query GetStudents {
+  students(idInstitution: 1000) {
+    ...RegularStudent
+  }
+}
+    ${RegularStudentFragmentDoc}`;
+
+/**
+ * __useGetStudentsQuery__
+ *
+ * To run a query within a React component, call `useGetStudentsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetStudentsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetStudentsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetStudentsQuery(baseOptions?: Apollo.QueryHookOptions<GetStudentsQuery, GetStudentsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetStudentsQuery, GetStudentsQueryVariables>(GetStudentsDocument, options);
+      }
+export function useGetStudentsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetStudentsQuery, GetStudentsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetStudentsQuery, GetStudentsQueryVariables>(GetStudentsDocument, options);
+        }
+export type GetStudentsQueryHookResult = ReturnType<typeof useGetStudentsQuery>;
+export type GetStudentsLazyQueryHookResult = ReturnType<typeof useGetStudentsLazyQuery>;
+export type GetStudentsQueryResult = Apollo.QueryResult<GetStudentsQuery, GetStudentsQueryVariables>;
 export const GetTeachersDocument = gql`
     query GetTeachers {
   teachers(idInstitution: 1000) {

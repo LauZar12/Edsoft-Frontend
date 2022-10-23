@@ -32,6 +32,7 @@ function DynamicTable({ columns, data }: DynamicTableProps) {
             <TableRow {...headerGroup.getHeaderGroupProps()} >
               {headerGroup.headers.map((column) => (
                 <TableCell
+                key={column.id}
                   className={`bg-white border-white fs-6 text-primary text-opacity-75 opacity${
                     active ? "active" : ""
                   } transitionUp ${active ? "active" : ""}`}
