@@ -16,6 +16,7 @@ import Logros from './screens/Logros';
 import CopyYear from './screens/CopyYear';
 import CrearDocente from './screens/CrearDocente';
 import CrearSecretario from './screens/CrearSecretario';
+import EditarDocente from './screens/EditarDocente';
 
 function App() {
 	return (
@@ -39,6 +40,8 @@ function App() {
 				<Route path='/copyyear' element={<CopyYear/>} />
 				<Route path='/creardocente' element={<CrearDocente/>} />
 				<Route path='/crearsecre' element={<CrearSecretario/>} />
+				<Route path='/editardocente/:id' element={<EditarDocente/>} />
+
 			</Routes>
 		</BrowserRouter>
 	);

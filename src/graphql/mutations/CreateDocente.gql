@@ -1,0 +1,27 @@
+mutation CreateTeacher(
+  $degree: String!
+  $direction: String!
+  $email: String!
+  $idInstitution: Int!
+  $identification: String!
+  $lastName: String!
+  $name: String!
+  $phone: String!
+  $typeId: Int!
+) {
+  createTeacher(
+    degree: $degree
+    direction: $direction
+    email: $email
+    idInstitution: $idInstitution
+    identification: $identification
+    lastName: $lastName
+    name: $name
+    phone: $phone
+    typeId: $typeId
+  ) {
+    teacher {
+      idTeacher
+    }
+  }
+}

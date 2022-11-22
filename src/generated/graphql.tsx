@@ -1671,6 +1671,21 @@ export type RegularStudentFragment = { __typename?: 'StudentType', name: string,
 
 export type RegularTeacherFragment = { __typename?: 'TeacherType', idTeacher: string, name: string, lastName: string, degree: string };
 
+export type CreateTeacherMutationVariables = Exact<{
+  degree: Scalars['String'];
+  direction: Scalars['String'];
+  email: Scalars['String'];
+  idInstitution: Scalars['Int'];
+  identification: Scalars['String'];
+  lastName: Scalars['String'];
+  name: Scalars['String'];
+  phone: Scalars['String'];
+  typeId: Scalars['Int'];
+}>;
+
+
+export type CreateTeacherMutation = { __typename?: 'Mutation', createTeacher?: { __typename?: 'CreateTeacher', teacher?: { __typename?: 'TeacherType', idTeacher: string } | null } | null };
+
 export type DeleteDocenteMutationVariables = Exact<{
   idInstitucion: Scalars['Int'];
   idDocente: Scalars['Int'];
@@ -1686,6 +1701,22 @@ export type LoginMutationVariables = Exact<{
 
 
 export type LoginMutation = { __typename?: 'Mutation', tokenAuth?: { __typename?: 'ObtainJSONWebToken', token?: string | null, errors?: any | null } | null };
+
+export type UpdateTeacherMutationVariables = Exact<{
+  degree: Scalars['String'];
+  direction: Scalars['String'];
+  email: Scalars['String'];
+  idInstitution: Scalars['Int'];
+  identification: Scalars['String'];
+  lastName: Scalars['String'];
+  name: Scalars['String'];
+  phone: Scalars['String'];
+  typeId: Scalars['Int'];
+  idTeacher: Scalars['Int'];
+}>;
+
+
+export type UpdateTeacherMutation = { __typename?: 'Mutation', updateTeacher?: { __typename?: 'UpdateTeacher', teacher?: { __typename?: 'TeacherType', idTeacher: string } | null } | null };
 
 export type GetInstitutionsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1737,6 +1768,59 @@ export const RegularTeacherFragmentDoc = gql`
   degree
 }
     `;
+export const CreateTeacherDocument = gql`
+    mutation CreateTeacher($degree: String!, $direction: String!, $email: String!, $idInstitution: Int!, $identification: String!, $lastName: String!, $name: String!, $phone: String!, $typeId: Int!) {
+  createTeacher(
+    degree: $degree
+    direction: $direction
+    email: $email
+    idInstitution: $idInstitution
+    identification: $identification
+    lastName: $lastName
+    name: $name
+    phone: $phone
+    typeId: $typeId
+  ) {
+    teacher {
+      idTeacher
+    }
+  }
+}
+    `;
+export type CreateTeacherMutationFn = Apollo.MutationFunction<CreateTeacherMutation, CreateTeacherMutationVariables>;
+
+/**
+ * __useCreateTeacherMutation__
+ *
+ * To run a mutation, you first call `useCreateTeacherMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateTeacherMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createTeacherMutation, { data, loading, error }] = useCreateTeacherMutation({
+ *   variables: {
+ *      degree: // value for 'degree'
+ *      direction: // value for 'direction'
+ *      email: // value for 'email'
+ *      idInstitution: // value for 'idInstitution'
+ *      identification: // value for 'identification'
+ *      lastName: // value for 'lastName'
+ *      name: // value for 'name'
+ *      phone: // value for 'phone'
+ *      typeId: // value for 'typeId'
+ *   },
+ * });
+ */
+export function useCreateTeacherMutation(baseOptions?: Apollo.MutationHookOptions<CreateTeacherMutation, CreateTeacherMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateTeacherMutation, CreateTeacherMutationVariables>(CreateTeacherDocument, options);
+      }
+export type CreateTeacherMutationHookResult = ReturnType<typeof useCreateTeacherMutation>;
+export type CreateTeacherMutationResult = Apollo.MutationResult<CreateTeacherMutation>;
+export type CreateTeacherMutationOptions = Apollo.BaseMutationOptions<CreateTeacherMutation, CreateTeacherMutationVariables>;
 export const DeleteDocenteDocument = gql`
     mutation DeleteDocente($idInstitucion: Int!, $idDocente: Int!) {
   deleteTeacher(idInstitution: $idInstitucion, idTeacher: $idDocente) {
@@ -1806,6 +1890,61 @@ export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginM
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
 export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
 export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
+export const UpdateTeacherDocument = gql`
+    mutation UpdateTeacher($degree: String!, $direction: String!, $email: String!, $idInstitution: Int!, $identification: String!, $lastName: String!, $name: String!, $phone: String!, $typeId: Int!, $idTeacher: Int!) {
+  updateTeacher(
+    degree: $degree
+    direction: $direction
+    email: $email
+    idInstitution: $idInstitution
+    identification: $identification
+    lastName: $lastName
+    name: $name
+    phone: $phone
+    typeId: $typeId
+    idTeacher: $idTeacher
+  ) {
+    teacher {
+      idTeacher
+    }
+  }
+}
+    `;
+export type UpdateTeacherMutationFn = Apollo.MutationFunction<UpdateTeacherMutation, UpdateTeacherMutationVariables>;
+
+/**
+ * __useUpdateTeacherMutation__
+ *
+ * To run a mutation, you first call `useUpdateTeacherMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateTeacherMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateTeacherMutation, { data, loading, error }] = useUpdateTeacherMutation({
+ *   variables: {
+ *      degree: // value for 'degree'
+ *      direction: // value for 'direction'
+ *      email: // value for 'email'
+ *      idInstitution: // value for 'idInstitution'
+ *      identification: // value for 'identification'
+ *      lastName: // value for 'lastName'
+ *      name: // value for 'name'
+ *      phone: // value for 'phone'
+ *      typeId: // value for 'typeId'
+ *      idTeacher: // value for 'idTeacher'
+ *   },
+ * });
+ */
+export function useUpdateTeacherMutation(baseOptions?: Apollo.MutationHookOptions<UpdateTeacherMutation, UpdateTeacherMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateTeacherMutation, UpdateTeacherMutationVariables>(UpdateTeacherDocument, options);
+      }
+export type UpdateTeacherMutationHookResult = ReturnType<typeof useUpdateTeacherMutation>;
+export type UpdateTeacherMutationResult = Apollo.MutationResult<UpdateTeacherMutation>;
+export type UpdateTeacherMutationOptions = Apollo.BaseMutationOptions<UpdateTeacherMutation, UpdateTeacherMutationVariables>;
 export const GetInstitutionsDocument = gql`
     query GetInstitutions {
   institutions {

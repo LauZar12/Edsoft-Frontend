@@ -30,12 +30,12 @@ const SideBar: FC = () => {
             </a>
           </div>
           <div className="mb-4">
-            <a href="">
+            <a href="/docentes">
               <img src={icon2} className="w-16 h-14 mb-10" />
             </a>
           </div>
           <div className="mb-4">
-            <a href="">
+            <a href="/tipocalificacion">
               <img src={icon3} className="w-16 h-14 mb-10" />
             </a>
           </div>

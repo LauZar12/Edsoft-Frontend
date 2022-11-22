@@ -80,6 +80,9 @@ function Contacto() {
             </div>
           </div>
         </div>
+        <h4 className="col-6 mt-0 pt-10">
+          <Ellipse width={100} height={100} />
+        </h4>
       </div>
     </div>
   );

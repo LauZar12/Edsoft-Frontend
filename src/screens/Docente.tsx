@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import SideBarWithText from "../components/SideBarWithText";
 import edit from "../assets/01editar.png";
 import delet from "../assets/01eliminar.png";
+import { useNavigate } from "react-router-dom";
 
 const columns = [
   {
@@ -35,6 +36,7 @@ const columns = [
 
 function Docentes() {
   const [DeleteDocente] = useDeleteDocenteMutation();
+  const navigate = useNavigate();
   const [active, setActive] = useState(false);
   const { data, loading, error, refetch,  } = useGetTeachersQuery({fetchPolicy: "network-only"});
   useEffect(() => {
@@ -49,6 +51,7 @@ function Docentes() {
       editar: (
         <button
           className="border-0"
+          onClick= {()=>{navigate(`/editardocente/${teacher?.idTeacher}`)}}
         >
           <img className={`h-13 w-15`} src={edit} />
         </button>
@@ -62,7 +65,8 @@ function Docentes() {
               await DeleteDocente({
                 variables: {
                   idDocente: parseInt(teacher.idTeacher, 10),
-                  idInstitucion: 1000 /**CAMBIAR ESTO */,
+                  idInstitucion: 1000
+                  /**CAMBIAR ESTO */,
                 },
               });
               await refetch();

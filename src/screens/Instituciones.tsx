@@ -3,9 +3,7 @@ import Nav from "../components/Nav";
 import useWindowSize from "../hooks/useWindowSize";
 import { useMemo } from "react";
 import { useGetInstitutionsQuery } from "../generated/graphql";
-import { idText } from "typescript";
 import { useEffect, useState } from "react";
-import lupa from "../assets/1lupa.png";
 const columns = [
   {
     Header: "Nombre",
@@ -59,7 +57,6 @@ function Instituciones() {
                 placeholder="        Buscar institución"
                 aria-label="Search"
               />
-              <img className='h-6 w-7' src={lupa} alt='lupa' /> 
             </h5>
             <select
               className={`col-1 bg-gray2 text-gray3 rounded-5 border-0 p-2 fs-5 my-2 me-15 opacity${

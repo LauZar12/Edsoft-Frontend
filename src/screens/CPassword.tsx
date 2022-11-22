@@ -24,7 +24,7 @@ function Instituciones() {
         </h1>
         <div className="col-lg-10 ms-20 bg-white align-text-middle rounded border-gray4 py-4 row rounded-5 shadow-sm h-70 p-3 mt-0">
           <h1 className={`text-black me-20 ms-48 fs-4 opacity${active ? "active" : ""} transitionLeft ${active ? "active" : ""}`}>
-            Contraseña atual
+            Contraseña actual
             <input
               className={`bg-white rounded border rounded-3 border-gray4 ps-6 ms-40 fs-4 mt-10 col-lg-4`}
             />

@@ -1,10 +1,11 @@
 import useWindowSize from "../hooks/useWindowSize";
 import { useEffect, useState } from "react";
 import SideBarWithText from "../components/SideBarWithText";
-import { useCreateTeacherMutation } from "../generated/graphql";
-import { useNavigate } from "react-router-dom";
+import { useUpdateTeacherMutation } from "../generated/graphql";
+import { useNavigate, useParams } from "react-router-dom";
 
-function CrearDocente() {
+
+function EditarDocente() {
   const windowSize = useWindowSize();
   const [active, setActive] = useState(false);
   const [direccion, setDireccion] = useState("");
@@ -15,12 +16,13 @@ function CrearDocente() {
   const [email, setEmail] = useState("");
   const [titulo, setTitulo] = useState("");
   const [cedula, setCedula] = useState("");
-  const [CreateDocente] = useCreateTeacherMutation();
+  const [EditarDocente] = useUpdateTeacherMutation();
+  let { id } = useParams();
   const navigate = useNavigate();
   useEffect(() => {
     setActive(true);
   }, []);
-
+  
   return (
     <SideBarWithText
       location={"Funcionarios"}
@@ -32,7 +34,7 @@ function CrearDocente() {
             active ? "active" : ""
           } transitionDown ${active ? "active" : ""}`}
         >
-          Crear Docente
+          Editar Docente
         </h1>
         <div className="col-lg-10 ms-20 bg-white align-text-middle rounded border-gray4 py-4 row rounded-5 shadow-sm h-70 p-3 mt-0">
           <p
@@ -145,9 +147,9 @@ function CrearDocente() {
           >
             <h4
               className={`text-white pt-2`}
-              onClick={async () => {
-                await CreateDocente({
-                  variables: {
+              onClick={async() => {
+                await EditarDocente({
+                  variables:{
                     degree: titulo,
                     direction: direccion,
                     email: email,
@@ -157,12 +159,14 @@ function CrearDocente() {
                     phone: telefono,
                     idInstitution: 1000,
                     typeId: 1,
+                    idTeacher: parseInt(id??""),
                   },
-                });
-                navigate("/docentes");
+                }); 
+                navigate("/docentes")
               }}
+              
             >
-              Crear Docente
+              Editar Docente
             </h4>
           </button>
         </div>
@@ -171,4 +175,4 @@ function CrearDocente() {
   );
 }
 
-export default CrearDocente;
+export default EditarDocente;
